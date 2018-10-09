@@ -1,5 +1,5 @@
 PATTERN="(.*)[sS]{1}[0-9]+[eE]{1}[0-9]+"
-TARGET_DIR=$2
+TARGET_DIR="$2/"
 
 
 if [ -z $1 ]; then
