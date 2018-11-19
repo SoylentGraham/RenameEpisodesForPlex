@@ -75,7 +75,7 @@ if [ -d "$1" ]; then
 	# IFS sets output to line endings otherwise we can't handle filenames with spaces
 	# https://www.cyberciti.biz/tips/handling-filenames-with-spaces-in-bash.html
 	IFS=$(echo -en "\n\b")
-	for FilePath in "$1/*.*"; do
+	for FilePath in $1/*.*; do
 		ProcessFilename $FilePath
 	done
 else
