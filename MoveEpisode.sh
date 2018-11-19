@@ -17,7 +17,7 @@ fi
 function ProcessFilename()
 {
 	FILEPATH=$1
-	echo "running: $FILEPATH"
+	echo "running: $FILEPATH" >> MoveEpisode.log
 	FILEDIR=`dirname $FILEPATH`
 	FILENAME=`basename $FILEPATH`
 
@@ -70,13 +70,16 @@ function ProcessFilename()
 
 # run on directory if specified, otherwise single file
 if [ -d "$1" ]; then
+	echo "Running on directory [$1]" >> MoveEpisode.log
+
 	# IFS sets output to line endings otherwise we can't handle filenames with spaces
 	# https://www.cyberciti.biz/tips/handling-filenames-with-spaces-in-bash.html
 	IFS=$(echo -en "\n\b")
-	for FilePath in $1/*.*; do
+	for FilePath in "$1/*.*"; do
 		ProcessFilename $FilePath
 	done
 else
+	echo "Running on single filename [$1]" >> MoveEpisode.log
 	ProcessFilename $1
 fi
 
