@@ -1,4 +1,5 @@
-PATTERN="(.*)[sS]{1}[0-9]+[eE]{1}[0-9]+"
+PATTERN_SERIESEPISODE="(.*)[sS]{1}[0-9]+[eE]{1}[0-9]+"
+PATTERN_DAILY="(.*).20[0-9]{2}.[0-9]{2}.[0-9]{2}."
 TARGET_DIR="$2/"
 
 
@@ -16,6 +17,7 @@ fi
 #	returns 0/1 as false/true
 function ProcessFilename()
 {
+	PATTERN=$2
 	FILEPATH=$1
 	echo "running: $FILEPATH" >> MoveEpisode.log
 	FILEDIR=`dirname $FILEPATH`
@@ -76,7 +78,8 @@ if [ -d "$1" ]; then
 	# https://www.cyberciti.biz/tips/handling-filenames-with-spaces-in-bash.html
 	IFS=$(echo -en "\n\b")
 	for FilePath in $1/*.*; do
-		ProcessFilename $FilePath
+		ProcessFilename $FilePath $PATTERN_SERIESEPISODE
+		ProcessFilename $FilePath $PATTERN_DAILY
 	done
 else
 	echo "Running on single filename [$1]" >> MoveEpisode.log
